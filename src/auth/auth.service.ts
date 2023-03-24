@@ -26,11 +26,13 @@ export class AuthService {
                 hash,
             }
         });
+        
+        delete user.hash;
 
         return user;
 
         } catch (error) {
-        if (error instanceof PrismaClientKnownRequestError){
+        if (error instanceof PrismaClientKnownRequestError) {
             if (error.code === 'P2002'){
                 throw new ForbiddenException (
                     'Credentials taken'
@@ -40,7 +42,33 @@ export class AuthService {
         throw error;
         }
     }
-    signin(){
-        return 'imlogin'
+    async signin(dto: AuthDto) {
+        try {
+            // trouver le user 
+
+            const user =  await this.prisma.user.findUnique({
+                where: {
+                    email: dto.email,
+                }
+            })
+            //  si l'utilisateur n'est pas trouvé 
+
+            if (!user) throw new ForbiddenException('email incorrect')
+
+            // compare password
+            const passwordcompare = bcrypt.compareSync(dto.password, user.hash);
+            if (!passwordcompare) throw new ForbiddenException ('password incorrect')
+
+
+            delete user.hash;
+
+            return user;
+
+        } catch {
+
+        }
+
+
+
     }
 }
