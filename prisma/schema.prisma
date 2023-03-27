@@ -33,4 +33,29 @@ model Bookmark {
   link String
   userId Int
   user User @relation(fields: [userId], references: [id])
+
+   bookmarkCategories BookmarkCategory[]
+}
+
+model BookmarkCategory {
+
+  id Int @id @default(autoincrement())
+  createAt DateTime @default(now()) 
+  updateAt DateTime @updatedAt
+
+  bookmarkId Int
+  bookmark Bookmark @relation(fields: [bookmarkId], references: [id])
+
+  categoryId Int
+  category Category @relation(fields: [categoryId], references: [id])
+}
+
+model Category {
+  
+  id Int @id @default(autoincrement())
+  createAt DateTime @default(now()) 
+  updateAt DateTime @updatedAt
+
+  name String @unique
+  bookmarks BookmarkCategory[]
 }
