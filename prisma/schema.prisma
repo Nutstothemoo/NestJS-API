@@ -32,9 +32,9 @@ model Bookmark {
   description String?
   link String
   userId Int
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-   bookmarkCategories BookmarkCategory[]
+  bookmarkCategories BookmarkCategory[]
 }
 
 model BookmarkCategory {
@@ -51,7 +51,7 @@ model BookmarkCategory {
 }
 
 model Category {
-  
+
   id Int @id @default(autoincrement())
   createAt DateTime @default(now()) 
   updateAt DateTime @updatedAt
