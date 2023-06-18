@@ -8,6 +8,9 @@ import { EthereumService } from './ether/ether.service';
 import { EthereumModule } from './ether/ether.module';
 import { BscScanProviderModule } from './bsc-provider/bsc-provider.module';
 import { BscScanController } from './bsc-provider/bsc-provider.controller';
+import { WalletService } from './wallet/wallet.service';
+import { SmartContractService } from './smart-contract/smart-contract.service';
+import { ContractService } from './contract/contract.service';
 
 @Module({
   imports: [
@@ -24,6 +27,8 @@ import { BscScanController } from './bsc-provider/bsc-provider.controller';
   ],
   providers: [
     // EthereumService
-  ],
+  WalletService,
+    SmartContractService,
+    ContractService],
 })
 export class AppModule {}

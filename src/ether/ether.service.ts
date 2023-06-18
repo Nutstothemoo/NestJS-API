@@ -1,29 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import { ethers, Contract, InterfaceAbi } from 'ethers';
+import { ethers, Contract, InterfaceAbi, Wallet } from 'ethers';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class EthereumService {
   private provider: ethers.JsonRpcProvider;
   private contract: Contract;
+  private wallet: Wallet;
 
   constructor(config: ConfigService) {
-    // A Web3Provider wraps a standard Web3 provider, which is
-    // what MetaMask injects as window.ethereum into each page
+    const rpcUrl = config.get('BSC_RPC_URL');
+    this.provider = new ethers.JsonRpcProvider(rpcUrl);
+    const privateKey = config.get('PRIVATE_KEY');
+    this.wallet = new ethers.Wallet(privateKey, this.provider);
 
-    // const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-    // MetaMask requires requesting permission to connect users accounts
-    // await provider.send('eth_requestAccounts', []);
-    this.provider = new ethers.JsonRpcProvider(config.get('INFURA_END_POINT'));
-
-    const contractAddress = '<CONTRACT_ADDRESS>';
-    const contractAbi = <InterfaceAbi>['<ABI>'];
-    this.contract = new ethers.Contract(
-      contractAddress,
-      contractAbi,
-      this.provider,
-    );
+    // this.provider = new ethers.JsonRpcProvider(config.get('INFURA_END_POINT'));
+    // const contractAddress = '<CONTRACT_ADDRESS>';
+    // const contractAbi = <InterfaceAbi>['<ABI>'];
+    // this.contract = new ethers.Contract(
+    //   contractAddress,
+    //   contractAbi,
+    //   this.provider,
+    // );
   }
 
   async getContractName(): Promise<string> {
