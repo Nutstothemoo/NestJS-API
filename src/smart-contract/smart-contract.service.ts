@@ -1,11 +1,7 @@
-import {
-  EthersContract,
-  InjectContractProvider,
-  Contract,
-  Network,
-} from 'nestjs-ethers';
+import { EthersContract, InjectContractProvider } from 'nestjs-ethers';
 import * as ABI from './utils/ABI.json';
 import { Injectable } from '@nestjs/common';
+import { Network, Contract } from 'ethers';
 
 @Injectable()
 class SmartContractService {

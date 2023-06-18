@@ -11,6 +11,9 @@ import { BscScanController } from './bsc-provider/bsc-provider.controller';
 import { WalletService } from './wallet/wallet.service';
 import { SmartContractService } from './smart-contract/smart-contract.service';
 import { ContractService } from './contract/contract.service';
+import { MetaMaskService } from './meta-mask/meta-mask.service';
+import { MetaMaskController } from './meta-mask/meta-mask.controller';
+import { MetaMaskModule } from './meta-mask/meta-mask.module';
 
 @Module({
   imports: [
@@ -20,15 +23,18 @@ import { ContractService } from './contract/contract.service';
     ConfigModule.forRoot({ isGlobal: true }),
     // EthereumModule,
     BscScanProviderModule,
+    MetaMaskModule,
   ],
   controllers: [
     // EthereumController,
     BscScanController,
+    MetaMaskController,
   ],
   providers: [
     // EthereumService
   WalletService,
     SmartContractService,
-    ContractService],
+    ContractService,
+    MetaMaskService],
 })
 export class AppModule {}
