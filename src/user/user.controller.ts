@@ -16,20 +16,20 @@ import { UserService } from './user.service';
 @UseGuards(JwtGuard)
 @Controller('users')
 export class UserController {
-    constructor(private userService: UserService) {}
+  constructor(private userService: UserService) {}
 
-    @Get('me')
-    getMe(@GetUser() user: User) {
-        return user;
-    }
+  @Get('me')
+  getMe(@GetUser() user: User) {
+    return user;
+  }
 
-    @Patch()
-    editUser(@GetUser('id') userId: number, @Body() dto: EditUserDto) {
-        return this.userService.editUser(userId, dto);
-    }
+  @Patch()
+  editUser(@GetUser('id') userId: number, @Body() dto: EditUserDto) {
+    return this.userService.editUser(userId, dto);
+  }
 
-    @Delete(':userId')
-    deleteUser(@Param('userId') userId: number) {
-        this.userService.deleteUser(userId);
-    }
+  @Delete(':userId')
+  deleteUser(@Param('userId') userId: number) {
+    this.userService.deleteUser(userId);
+  }
 }

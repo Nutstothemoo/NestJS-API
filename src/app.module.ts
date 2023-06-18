@@ -5,7 +5,9 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
 import { EthereumController } from './ether/ether.controller';
 import { EthereumService } from './ether/ether.service';
-import { EtherModule } from './ether/ether.module';
+import { EthereumModule } from './ether/ether.module';
+import { BscScanProviderModule } from './bsc-provider/bsc-provider.module';
+import { BscScanController } from './bsc-provider/bsc-provider.controller';
 
 @Module({
   imports: [
@@ -13,9 +15,15 @@ import { EtherModule } from './ether/ether.module';
     UserModule,
     PrismaModule,
     ConfigModule.forRoot({ isGlobal: true }),
-    EtherModule,
+    // EthereumModule,
+    BscScanProviderModule,
   ],
-  controllers: [EthereumController],
-  providers: [EthereumService],
+  controllers: [
+    // EthereumController,
+    BscScanController,
+  ],
+  providers: [
+    // EthereumService
+  ],
 })
 export class AppModule {}
