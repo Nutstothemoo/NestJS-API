@@ -30,6 +30,7 @@
     "argon2": "^0.30.3",
     "bcrypt": "^5.1.0",
     "dotenv-cli": "^7.1.0",
+    "ethers": "^6.6.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.1.13",
